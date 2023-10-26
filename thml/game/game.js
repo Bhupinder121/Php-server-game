@@ -94,7 +94,7 @@ function gameOver() {
     <h1>Time ran out</h1>
     <p>Your final score is ${score}</p>
     <button onclick="location.reload()">Reload</button>
-  `;
+    <button class="leader">Leader Board</button>`;
 
   endgameEl.style.display = 'flex';
 }

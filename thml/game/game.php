@@ -54,7 +54,7 @@
 
       <div id="end-game-container" class="end-game-container"></div>
     </div>
-    <button class="leader">Leader Board</button>
+    <button class="leader-over">Leader Board</button>
     <script src="game.js"></script>
   </body>
 </html>
