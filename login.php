@@ -1,10 +1,10 @@
-<!DOCTYPE html>
 <?php
 include("dbConnection.php");
 mysqli_select_db($conn, "accounts");
+session_start();
+
 ?>
 <html>
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,6 +27,7 @@ mysqli_select_db($conn, "accounts");
             overflow: hidden;
         }
     </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
     <link rel="stylesheet" href="thml/index.css">
 </head>
 
@@ -68,16 +69,21 @@ mysqli_select_db($conn, "accounts");
         if($data){
             $dbPassword = $data["password"];
             if(password_verify($password, $dbPassword)){
-                echo("You Logged in $username");
-                $file = "./thml/index.php";
+                $_SESSION["username"] = $username;
+                $_SESSION["password"] = $password;
+                $file = "./thml/game/game.php";
                 header("Location: ".$file);
             }
             else{
-                echo("Wrong Password");
+                echo('<script type="text/JavaScript">  
+                    alert("Wrong password"); 
+                    </script>');
             }
         }
         else{
-            echo("Wrong Username");
+            echo('<script type="text/JavaScript">  
+                    alert("Wrong username"); 
+                    </script>');
         }
     }
 

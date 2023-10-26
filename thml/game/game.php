@@ -1,18 +1,21 @@
+<?php
+  session_start();
+?>
+
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" href="game.css" />
     <title>Speed Typer</title>
   </head>
   <body>
     <div class="navbar navbar-dark bg-dark">
       <h2 style="color: white;">👩‍💻 Typing Game 👨‍💻</h2>
       <div class="icon">
-        <img src="" width="30" height="30" class="d-inline-block align-top" alt="">
-        <span id="username">username</span>
+        <span id="username">👤<?php echo($_SESSION["username"]) ?></span>
       </div>
     </div>
     
@@ -52,6 +55,6 @@
       <div id="end-game-container" class="end-game-container"></div>
     </div>
     <button class="leader">Leader Board</button>
-    <script src="index.js"></script>
+    <script src="game.js"></script>
   </body>
 </html>
