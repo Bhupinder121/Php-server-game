@@ -2,17 +2,24 @@ class star{
     constructor(x, y){
         this.pos = createVector(x, y);
         this.vel = createVector(0, 0);
-        this.acc = createVector(random(-1, 1), random(-1, 1));
+        this.acc = createVector(random(-6, 6), random(-6, 6));
         this.radius = 8;
         this.isInfected = false;
+        this.collision = false; 
+        setTimeout(()=>{
+            
+            this.vel.x = map(this.vel.x, -6, 6, -1, 1);
+            this.vel.y = map(this.vel.y, -6, 6, -1, 1);
+            this.collision = true;
+        }, 2000);
     }
 
     checkBroundary(){
         if(this.pos.x < this.radius || this.pos.x > width-this.radius){
-            this.acc.x *= -1;
+            this.vel.x *= -1;
         }
         if(this.pos.y < this.radius || this.pos.y > height-this.radius){
-            this.acc.y *= -1;
+            this.vel.y *= -1;
         }
     }
     
@@ -22,22 +29,22 @@ class star{
             let top_hit = collideLineCircle(boxs[i].leftPoint.x, boxs[i].leftPoint.y, boxs[i].rightPoint.x, boxs[i].rightPoint.y, this.pos.x, this.pos.y, this.radius);
             if(top_hit){
                 hit = true;
-                this.acc.y *= -1;
+                this.vel.y *= -1;
             }
             let right_hit = collideLineCircle(boxs[i].rightPoint.x, boxs[i].rightPoint.y, boxs[i].rightBottomPoint.x, boxs[i].rightBottomPoint.y, this.pos.x, this.pos.y, this.radius);
             if(right_hit){
                 hit = true;
-                this.acc.x *= -1;
+                this.vel.x *= -1;
             }
             let bottom_hit = collideLineCircle(boxs[i].rightBottomPoint.x, boxs[i].rightBottomPoint.y, boxs[i].leftBottomPoint.x, boxs[i].leftBottomPoint.y, this.pos.x, this.pos.y, this.radius);
             if(bottom_hit){
                 hit = true;
-                this.acc.y *= -1;
+                this.vel.y *= -1;
             }
             let left_hit = collideLineCircle(boxs[i].leftBottomPoint.x, boxs[i].leftBottomPoint.y, boxs[i].leftPoint.x, boxs[i].leftPoint.y, this.pos.x, this.pos.y, this.radius);
             if(left_hit){
                 hit = true;
-                this.acc.x *= -1;
+                this.vel.x *= -1;
             }
         }
         return hit;
@@ -49,7 +56,7 @@ class star{
                 let hit = collideLineCircle(walls[i].p1.x, walls[i].p1.y, walls[i].p2.x, walls[i].p2.y, this.pos.x, this.pos.y, this.radius);
                 if(hit){
                     walls[i].health -= 1;
-                    this.acc.mult(-1);
+                    this.vel.mult(-1);
                     break;
                 }
             }
@@ -63,8 +70,8 @@ class star{
             }
             let hit = collideCircleCircle(this.pos.x, this.pos.y, this.radius, stars[i].pos.x, stars[i].pos.y, stars[i].radius);
             if(hit){
-                this.acc.mult(-1);
-                stars[i].acc.mult(-1);
+                this.vel.mult(-1);
+                stars[i].vel.mult(-1);
                 if(this.isInfected){
                     stars[i].isInfected = true;
                 }
@@ -72,15 +79,19 @@ class star{
             }
         }
     }
+    
+    applyForce(f){
+        this.acc.add(f);
+    }
 
     update(){
         this.vel.add(this.acc);
         this.pos.add(this.vel);
-        this.vel.mult(0);
+        this.acc.mult(0);
     }
 
     show(){
-        this.collide_box();
+        
         this.update();
         if(this.isInfected){
             fill(0, 255, 255);
@@ -90,8 +101,12 @@ class star{
         }
         ellipse(this.pos.x, this.pos.y, this.radius);
         this.checkBroundary();
-        this.checkWalls();
-        this.checkStars();
+        if(this.collision){
+            
+            this.collide_box();
+            this.checkWalls();
+            this.checkStars();
+        }
     } 
 
 }

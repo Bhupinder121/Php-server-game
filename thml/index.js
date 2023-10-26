@@ -3,20 +3,45 @@ let boxs = [];
 let walls = [];
 let mouseStar;
 let lineConnected;
+let startButton;
+let buttonPos;
 
 function setup(){
     createCanvas(windowWidth, windowHeight);
     lineConnected = true;
+    buttonPos = createVector((width/2), (height/2) - 150);
     mouseStar = new star(mouseX, mouseY);
     mouseStar.radius = 10;
-    for(let i = 0; i < 200; i++){
-        stars.push(new star(random(width), random(height)));
-        let ran = floor(random(0, 10));
-        if(ran == 1){
-            stars[stars.length - 1].isInfected = true;
-        }
+    startButton = createButton("Start");
+    startButton.position(buttonPos.x, buttonPos.y);
+    startButton.id("start");
+    LeaderButton = createButton("Leader board");
+    LeaderButton.position(buttonPos.x, buttonPos.y + 100);
+    LeaderButton.id("start");
+    LogButton = createButton("Log out");
+    LogButton.position(buttonPos.x, buttonPos.y + 200);
+    LogButton.id("start");
+    startButton.mousePressed(explode);
+    // startButton.style("width", "100px");
+    // startButton.style("height", "20px");
+}
+
+function explode(){
+    // for(let i = 0; i < 200; i++){
+    //     stars.push(new star(buttonPos.x + 50, buttonPos.y + 25));
+    //     let ran = floor(random(0, 10));
+    //     if(ran == 1){
+    //         stars[stars.length - 1].isInfected = true;
+    //     }
         
+    // }
+    for(let i = 0; i < 3; i++){
+        boxs.push(new box(random(width-500), random(height-500), random(PI)));
     }
+}
+
+function start(){
+    
     for(let i = 0; i < 3; i++){
         boxs.push(new box(random(width-500), random(height-500), random(PI)));
     }
@@ -37,6 +62,11 @@ function mousePressed(){
         
     }
 }
+
+function checkInfected(star){
+    return star.isInfected;
+}
+
 function draw(){
     background(51);
     fill(255, 0, 0);
@@ -61,4 +91,7 @@ function draw(){
     for(let i = 0; i < boxs.length; i++){
         boxs[i].show();
     }
+
+    let infected = stars.filter(checkInfected);
+    console.log((infected.length/stars.length)*100);
 }
