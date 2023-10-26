@@ -10,7 +10,7 @@ mysqli_select_db($conn, "accounts");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SignUp page</title>
     
-    <link rel="stylesheet" href="thml/index.css">
+    <link rel="stylesheet" href="index.css">
     <style>
          body{
             --s: 50px;

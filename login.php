@@ -28,7 +28,7 @@ session_start();
         }
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
-    <link rel="stylesheet" href="thml/index.css">
+    <link rel="stylesheet" href="index.css">
 </head>
 
 <body>
