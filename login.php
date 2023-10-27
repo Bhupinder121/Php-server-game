@@ -71,7 +71,7 @@ session_start();
             if(password_verify($password, $dbPassword)){
                 $_SESSION["username"] = $username;
                 $_SESSION["password"] = $password;
-                $file = "./thml/game/game.php";
+                $file = "game.php";
                 header("Location: ".$file);
             }
             else{

@@ -15,7 +15,7 @@
     <div class="navbar navbar-dark bg-dark">
       <h2 style="color: white;">👩‍💻 Typing Game 👨‍💻</h2>
       <div class="icon">
-        <span id="username">👤<?php echo($_SESSION["username"]) ?></span>
+        <a href="login.php"id="username">👤<?php echo($_SESSION["username"]) ?></a>
       </div>
     </div>
     
@@ -54,7 +54,10 @@
 
       <div id="end-game-container" class="end-game-container"></div>
     </div>
-    <button class="leader-over">Leader Board</button>
+    <a id="screct" href="leader.php"></a>
+    <button class="leader" id="leader-btn">Leader Board</button>
     <script src="game.js"></script>
+    
   </body>
 </html>
+

@@ -89,6 +89,15 @@ mysqli_select_db($conn, "accounts");
                     if(!mysqli_query($conn, $query)){
                         echo("Error");
                     }
+                    $query = "INSERT INTO leaders(userId, score)
+                                VALUES('{$username}', 0)";
+                    if(!mysqli_query($conn, $query)){
+                        echo("Error");
+                    }
+                    echo('<script type="text/JavaScript">  
+                    alert("Account Created!!"); 
+                    </script>');
+                    header("Location: login.php");
                 }
             }
         }

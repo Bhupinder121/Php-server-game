@@ -18,6 +18,8 @@ body {
 #username {
   color: white;
   font-size: 30px;
+  text-decoration: none;
+
 }
 
 #settings{
@@ -65,16 +67,16 @@ body {
 }
 
 .leader{
-    position: absolute;
-    bottom: 20px;
-    right: 10px;
-    background-color: rgb(52,58,64);
-    color: #ffffff;
-    border: none;
-    border-radius: 5px;
-    overflow: hidden;
-    transition: 0.1s;
-    cursor: pointer;
+  position: absolute;
+  bottom: 20px;
+  right: 10px;
+  background-color: rgb(52,58,64);
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  overflow: hidden;
+  transition: 0.1s;
+  cursor: pointer;
 }
 
 .leader:hover {
@@ -88,7 +90,10 @@ box-shadow: 0 0 5px #03e9f4,
 }
 
 .leader-over{
-  float: left;
+  position: absolute;
+  bottom: 15px;
+  right: 5px;
+  cursor: pointer;
 }
 
 .end-game-container {
@@ -105,3 +110,9 @@ box-shadow: 0 0 5px #03e9f4,
   height: 100%;
   z-index: 1;
 }
+
+#screct{
+  visibility: hidden;
+}
+
+

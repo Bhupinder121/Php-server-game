@@ -3,10 +3,12 @@ const text = document.getElementById('text');
 const scoreEl = document.getElementById('score');
 const timeEl = document.getElementById('time');
 const endgameEl = document.getElementById('end-game-container');
-const settingsBtn = document.getElementById('settings-btn');
+const leaderBtn = document.getElementById('leader-btn');
 const settings = document.getElementById('settings');
 const settingsForm = document.getElementById('settings-form');
 const difficultySelect = document.getElementById('difficulty');
+const openLeader = document.getElementById("screct");
+
 
 // List of words for game
 const words = [
@@ -74,6 +76,7 @@ function addWordToDOM() {
 function updateScore() {
   score++;
   scoreEl.innerHTML = score;
+  
 }
 
 // Update time
@@ -94,8 +97,17 @@ function gameOver() {
     <h1>Time ran out</h1>
     <p>Your final score is ${score}</p>
     <button onclick="location.reload()">Reload</button>
-    <button class="leader">Leader Board</button>`;
-
+    <button class="leader-over" id="leader-over">Leader Board</button>`;
+    fetch('update.php', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+      },
+      body: "score=" + score
+    })
+    .then(response => response.text())
+    .then(data => console.log(data));
+  document.getElementById("leader-over").addEventListener('click', () => openLeader.click());
   endgameEl.style.display = 'flex';
 }
 
@@ -127,10 +139,11 @@ text.addEventListener('input', e => {
 });
 
 // Settings btn click
-settingsBtn.addEventListener('click', () => settings.classList.toggle('hide'));
+leaderBtn.addEventListener('click', () => openLeader.click());
 
 // Settings select
 settingsForm.addEventListener('change', e => {
   difficulty = e.target.value;
   localStorage.setItem('difficulty', difficulty);
+
 });
